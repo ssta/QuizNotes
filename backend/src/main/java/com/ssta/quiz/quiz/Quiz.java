@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2025. Stephen Stafford <clothcat@gmail.com>
+ *
+ * This code is licensed under the MIT license.  Please see LICENSE.md for details.
+ */
+
 package com.ssta.quiz.quiz;
 
 import com.ssta.quiz.user.User;

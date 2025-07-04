@@ -1,3 +1,15 @@
+/*
+ * Copyright (c) 2025. Stephen Stafford <clothcat@gmail.com>
+ *
+ * This code is licensed under the MIT license.  Please see LICENSE.md for details.
+ */
+
+/*
+ * Copyright (c) 2025. Stephen Stafford <clothcat@gmail.com>
+ *
+ * This code is licensed under the MIT license.  Please see LICENSE.md for details.
+ */
+
 -- Initial schema setup
 
 -- Users table for quiz masters
