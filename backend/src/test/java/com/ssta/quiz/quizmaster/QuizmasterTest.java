@@ -24,8 +24,8 @@ public class QuizmasterTest {
     String username = "testuser";
     String twitchId = "twitch12345";
     String email = "test@example.com";
-    LocalDateTime createdAt = LocalDateTime.now();
-    LocalDateTime lastLogin = LocalDateTime.now().plusHours(1);
+    ZonedDateTime createdAt = ZonedDateTime.now();
+    ZonedDateTime lastLogin = ZonedDateTime.now().plusHours(1);
 
     // When
     Quizmaster quizmaster = Quizmaster.builder()

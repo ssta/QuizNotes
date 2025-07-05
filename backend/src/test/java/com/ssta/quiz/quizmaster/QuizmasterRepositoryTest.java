@@ -6,10 +6,9 @@
 
 package com.ssta.quiz.quizmaster;
 
+import com.ssta.quiz.testconfig.AbstractRepositoryTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.time.ZonedDateTime;
 import java.util.Optional;
@@ -19,9 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Integration tests for the QuizmasterRepository.
  */
-@DataJpaTest
-@ActiveProfiles("test")
-public class QuizmasterRepositoryTest {
+public class QuizmasterRepositoryTest extends AbstractRepositoryTest {
 
   @Autowired
   private QuizmasterRepository quizmasterRepository;
