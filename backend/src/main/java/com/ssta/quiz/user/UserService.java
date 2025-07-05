@@ -7,13 +7,12 @@
 package com.ssta.quiz.user;
 
 import java.util.Optional;
-import java.util.UUID;
 
 public interface UserService {
 
   User createUser(User user);
 
-  Optional<User> findUserById(UUID id);
+  Optional<User> findUserById(long id);
 
   Optional<User> findUserByUsername(String username);
 
@@ -23,7 +22,7 @@ public interface UserService {
 
   User updateUser(User user);
 
-  void deleteUser(UUID id);
+  void deleteUser(long id);
 
   boolean existsByUsername(String username);
 

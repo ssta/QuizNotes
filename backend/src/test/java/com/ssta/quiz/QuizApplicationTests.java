@@ -6,11 +6,10 @@
 
 package com.ssta.quiz;
 
+import com.ssta.quiz.testconfig.AbstractIntegrationTest;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class QuizApplicationTests {
+class QuizApplicationTests extends AbstractIntegrationTest {
 
   @Test
   void contextLoads() {

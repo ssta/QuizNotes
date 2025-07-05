@@ -10,12 +10,18 @@
  * This code is licensed under the MIT license.  Please see LICENSE.md for details.
  */
 
+/*
+ * Copyright (c) 2025. Stephen Stafford <clothcat@gmail.com>
+ *
+ * This code is licensed under the MIT license.  Please see LICENSE.md for details.
+ */
+
 -- Initial schema setup
 
 -- Users table for quiz masters
 CREATE TABLE users
 (
-    id         UUID PRIMARY KEY,
+    id BIGINT PRIMARY KEY,
     username   VARCHAR(50) NOT NULL UNIQUE,
     twitch_id  VARCHAR(50) UNIQUE,
     email      VARCHAR(100) UNIQUE,
@@ -26,10 +32,10 @@ CREATE TABLE users
 -- Quizzes table
 CREATE TABLE quizzes
 (
-    id          UUID PRIMARY KEY,
+    id      BIGINT PRIMARY KEY,
     title       VARCHAR(255) NOT NULL,
     description TEXT,
-    user_id     UUID         NOT NULL REFERENCES users (id),
+    user_id BIGINT NOT NULL REFERENCES users (id),
     status      VARCHAR(20)  NOT NULL    DEFAULT 'DRAFT', -- DRAFT, ACTIVE, COMPLETED, ARCHIVED
     created_at  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
@@ -38,12 +44,13 @@ CREATE TABLE quizzes
 -- Questions table
 CREATE TABLE questions
 (
-    id            UUID PRIMARY KEY,
-    quiz_id       UUID    NOT NULL REFERENCES quizzes (id),
+    id      BIGINT PRIMARY KEY,
+    quiz_id BIGINT NOT NULL REFERENCES quizzes (id),
     question_text TEXT    NOT NULL,
     image_url     VARCHAR(255),
     time_limit    INTEGER NOT NULL         DEFAULT 20,
     order_index   INTEGER NOT NULL,
+    options JSONB,
     created_at    TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at    TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
@@ -51,8 +58,8 @@ CREATE TABLE questions
 -- Answer options table
 CREATE TABLE answer_options
 (
-    id          UUID PRIMARY KEY,
-    question_id UUID    NOT NULL REFERENCES questions (id),
+    id          BIGINT PRIMARY KEY,
+    question_id BIGINT NOT NULL REFERENCES questions (id),
     option_text TEXT    NOT NULL,
     is_correct  BOOLEAN NOT NULL         DEFAULT FALSE,
     order_index INTEGER NOT NULL,
@@ -62,9 +69,9 @@ CREATE TABLE answer_options
 -- Players table
 CREATE TABLE players
 (
-    id         UUID PRIMARY KEY,
+    id      BIGINT PRIMARY KEY,
     nickname   VARCHAR(50)  NOT NULL,
-    quiz_id    UUID         NOT NULL REFERENCES quizzes (id),
+    quiz_id BIGINT NOT NULL REFERENCES quizzes (id),
     session_id VARCHAR(100) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (quiz_id, nickname)
@@ -73,10 +80,10 @@ CREATE TABLE players
 -- Player answers table
 CREATE TABLE player_answers
 (
-    id               UUID PRIMARY KEY,
-    player_id        UUID NOT NULL REFERENCES players (id),
-    question_id      UUID NOT NULL REFERENCES questions (id),
-    answer_option_id UUID REFERENCES answer_options (id),
+    id               BIGINT PRIMARY KEY,
+    player_id        BIGINT NOT NULL REFERENCES players (id),
+    question_id      BIGINT NOT NULL REFERENCES questions (id),
+    answer_option_id BIGINT REFERENCES answer_options (id),
     response_time_ms INTEGER,
     score            INTEGER,
     created_at       TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,

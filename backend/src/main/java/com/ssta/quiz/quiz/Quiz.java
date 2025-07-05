@@ -10,6 +10,8 @@ import com.ssta.quiz.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -19,7 +21,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.ZonedDateTime;
-import java.util.UUID;
 
 @Entity
 @Table(name = "quizzes")
@@ -29,7 +30,8 @@ import java.util.UUID;
 public class Quiz {
 
   @Id
-  private UUID id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
   @Column(name = "title", nullable = false)
   private String title;
@@ -38,7 +40,7 @@ public class Quiz {
   private String description;
 
   @Column(name = "user_id", nullable = false)
-  private UUID userId;
+  private Long userId;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id", insertable = false, updatable = false)

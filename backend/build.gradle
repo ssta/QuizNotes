@@ -51,6 +51,8 @@ dependencies {
     // Database
     implementation 'org.flywaydb:flyway-core'
     implementation 'org.postgresql:postgresql'
+    // Add H2 database for testing
+    testImplementation 'com.h2database:h2'
 
     // Utilities
     compileOnly 'org.projectlombok:lombok'
@@ -96,7 +98,6 @@ task databaseTest(type: Test) {
         includeTags 'databaseTest'
     }
 }
-
 // Make sure databaseTest task doesn't run with the regular test task
 test {
     useJUnitPlatform {

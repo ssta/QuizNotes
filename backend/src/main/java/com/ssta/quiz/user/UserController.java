@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.UUID;
-
 @RestController
 @RequestMapping("/api/admin/users")
 public class UserController {
@@ -33,7 +31,7 @@ public class UserController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<User> getUserById(@PathVariable UUID id) {
+  public ResponseEntity<User> getUserById(@PathVariable long id) {
     return userService.findUserById(id)
         .map(ResponseEntity::ok)
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
@@ -53,7 +51,7 @@ public class UserController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<User> updateUser(@PathVariable UUID id, @RequestBody User user) {
+  public ResponseEntity<User> updateUser(@PathVariable long id, @RequestBody User user) {
     if (!userService.findUserById(id).isPresent()) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
     }
@@ -64,7 +62,7 @@ public class UserController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> deleteUser(@PathVariable UUID id) {
+  public ResponseEntity<Void> deleteUser(@PathVariable long id) {
     if (!userService.findUserById(id).isPresent()) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
     }

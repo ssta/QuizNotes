@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,10 +26,6 @@ public class UserServiceImpl implements UserService {
   @Override
   @Transactional
   public User createUser(User user) {
-    if (user.getId() == null) {
-      user.setId(UUID.randomUUID());
-    }
-
     ZonedDateTime now = ZonedDateTime.now();
     if (user.getCreatedAt() == null) {
       user.setCreatedAt(now);
@@ -42,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   @Transactional(readOnly = true)
-  public Optional<User> findUserById(UUID id) {
+  public Optional<User> findUserById(long id) {
     return userRepository.findById(id);
   }
 
@@ -73,7 +68,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   @Transactional
-  public void deleteUser(UUID id) {
+  public void deleteUser(long id) {
     userRepository.deleteById(id);
   }
 
