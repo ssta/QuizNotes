@@ -70,21 +70,15 @@ src/main/resources/
 
 ```
 src/
-├── test/                          # Unit and integration tests
-│   ├── java/
-│   │   └── com/ssta/quiz/
-│   │       ├── user/              # User module tests
-│   │       ├── quiz/              # Quiz module tests
-│   │       └── question/          # Question module tests
-│   └── resources/
-│       └── application-test.properties
-└── integrationTest/               # Separate source set for integration tests
+└── test/                          # Unit and integration tests
     ├── java/
     │   └── com/ssta/quiz/
-    │       └── db/
-    │           └── DatabaseConnectionIT.java
+    │       ├── user/              # User module tests
+    │       ├── quiz/              # Quiz module tests
+    │       └── question/          # Question module tests
     └── resources/
         └── application-test.properties
+ 
 ```
 
 ## Advantages of Domain-Driven Structure
@@ -141,59 +135,3 @@ The application is organized around the following core modules:
 5. **Reporting Module**
     - Generates leaderboards and statistics
     - Archives historical quiz data
-
-## Resource Organization
-
-```
-src/main/resources/
-├── application.properties         # Main application configuration
-├── application-dev.properties     # Development environment config
-├── application-prod.properties    # Production environment config
-├── application-test.properties    # Test environment config
-└── db/
-    └── migration/                 # Flyway database migrations
-        └── V1__init_schema.sql    # Initial database schema
-```
-
-## Test Organization
-
-```
-src/
-├── test/                          # Unit and integration tests
-│   ├── java/
-│   │   └── com/ssta/quiz/
-│   │       ├── controller/        # Controller tests
-│   │       ├── repository/        # Repository tests
-│   │       └── service/           # Service tests
-│   └── resources/
-│       └── application-test.properties
-└── integrationTest/               # Separate source set for integration tests
-    ├── java/
-    │   └── com/ssta/quiz/
-    │       └── db/
-    │           └── DatabaseConnectionIT.java
-    └── resources/
-        └── application-test.properties
-```
-
-## Dependency Management
-
-The project uses Gradle for dependency management with the following key dependencies:
-
-- Spring Boot (Web, Data JPA, Security, WebSocket)
-- PostgreSQL driver
-- Flyway for database migrations
-- Lombok for reducing boilerplate code
-- SpringDoc OpenAPI for API documentation
-
-## Future Structure Considerations
-
-While currently structured as a modular monolith, the project is designed with clear component boundaries to facilitate
-future decomposition into microservices if needed:
-
-1. Each module has well-defined interfaces
-2. Services communicate through interfaces rather than direct implementation references
-3. Configuration is centralized but organized by functional area
-
-This structure allows for a smooth transition to a microservices architecture while maintaining a cohesive development
-experience in the initial phases.

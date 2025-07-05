@@ -1,27 +1,12 @@
-plugins {
-    id 'org.springframework.boot' version '3.2.2'
-    id 'io.spring.dependency-management' version '1.1.4'
-    id 'java'
-}
-
-sourceSets {
-    integrationTest {
-        java.srcDir file('src/integrationTest/java')
-        resources.srcDir file('src/integrationTest/resources')
-        compileClasspath += main.output + test.output
-        runtimeClasspath += main.output + test.output
-    }
-}
-
 /*
  * Copyright (c) 2025. Stephen Stafford <clothcat@gmail.com>
  *
  * This code is licensed under the MIT license.  Please see LICENSE.md for details.
  */
-
-// Set duplicate handling strategy for integration test resources
-processIntegrationTestResources {
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+plugins {
+    id 'org.springframework.boot' version '3.2.2'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'java'
 }
 
 group = 'com.ssta'
@@ -32,8 +17,6 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
-    integrationTestImplementation.extendsFrom implementation
-    integrationTestRuntimeOnly.extendsFrom runtimeOnly
 }
 
 repositories {
@@ -52,7 +35,7 @@ dependencies {
     implementation 'org.flywaydb:flyway-core'
     implementation 'org.postgresql:postgresql'
     // Add H2 database for testing
-    testImplementation 'com.h2database:h2'
+//    testImplementation 'com.h2database:h2'
 
     // Utilities
     compileOnly 'org.projectlombok:lombok'
@@ -67,40 +50,13 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.testcontainers:postgresql'
-
-    // Integration Testing
-    integrationTestImplementation 'org.springframework.boot:spring-boot-starter-test'
-    integrationTestImplementation 'org.junit.jupiter:junit-jupiter-api'
-    integrationTestImplementation 'org.junit.jupiter:junit-jupiter-engine'
-    integrationTestImplementation 'org.springframework.security:spring-security-test'
-    integrationTestImplementation 'org.testcontainers:junit-jupiter'
-    integrationTestImplementation 'org.testcontainers:postgresql'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
 
-task integrationTest(type: Test) {
-    description = 'Runs the integration tests.'
-    group = 'verification'
-    testClassesDirs = sourceSets.integrationTest.output.classesDirs
-    classpath = sourceSets.integrationTest.runtimeClasspath
-    useJUnitPlatform()
-}
-
-task databaseTest(type: Test) {
-    description = 'Runs the database integration tests.'
-    group = 'verification'
-    testClassesDirs = sourceSets.integrationTest.output.classesDirs
-    classpath = sourceSets.integrationTest.runtimeClasspath
-    useJUnitPlatform {
-        includeTags 'databaseTest'
-    }
-}
-// Make sure databaseTest task doesn't run with the regular test task
 test {
     useJUnitPlatform {
-        excludeTags 'databaseTest'
     }
 }
