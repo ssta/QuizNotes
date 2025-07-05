@@ -7,19 +7,16 @@
 package com.ssta.quiz.question;
 
 import com.ssta.quiz.quiz.Quiz;
+import com.ssta.quiz.testconfig.AbstractRepositoryTest;
 import com.ssta.quiz.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
@@ -30,23 +27,10 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Test class for QuestionRepository using DataJpaTest for testing JPA repositories.
+ * Test class for QuestionRepository using the standardized PostgreSQL test container.
  * These tests verify that query methods work as expected with the actual database schema.
  */
-@DataJpaTest
-@ActiveProfiles("test")
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@TestPropertySource(properties = {
-    "spring.jpa.hibernate.ddl-auto=create-drop",
-    "spring.flyway.enabled=false",
-    "spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL",
-    "spring.datasource.driverClassName=org.h2.Driver",
-    "spring.datasource.username=sa",
-    "spring.datasource.password=",
-    "spring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
-    "spring.jpa.properties.hibernate.type.preferred_uuid_jdbc_type=CHAR"
-})
-public class QuestionRepositoryTest {
+public class QuestionRepositoryTest extends AbstractRepositoryTest {
 
   @Autowired
   private TestEntityManager entityManager; // Special EntityManager for testing
@@ -306,6 +290,6 @@ public class QuestionRepositoryTest {
     assertThat(updatedQuestion.getOptions()).isNotNull();
     assertThat(updatedQuestion.getOptions()).contains("Option A");
     assertThat(updatedQuestion.getOptions()).contains("Option B");
-    assertThat(updatedQuestion.getOptions()).contains("correct\":true");
+    assertThat(updatedQuestion.getOptions()).containsPattern("\"correct\"\\s*:\\s*true");
   }
 }
