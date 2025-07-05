@@ -11,13 +11,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 /**
  * Entity representing a quiz master (creator/host) in the system.
  */
 @Entity
-@Table(name = "quizmaster")
+@Table(name = "quizmasters")
 @Data
 @Builder
 @NoArgsConstructor
@@ -38,13 +38,13 @@ public class Quizmaster {
   private String email;
 
   @Column(name = "created_at", nullable = false, updatable = false)
-  private LocalDateTime createdAt;
+  private ZonedDateTime createdAt;
 
   @Column(name = "last_login")
-  private LocalDateTime lastLogin;
+  private ZonedDateTime lastLogin;
 
   @PrePersist
   protected void onCreate() {
-    createdAt = LocalDateTime.now();
+    createdAt = ZonedDateTime.now();
   }
 }

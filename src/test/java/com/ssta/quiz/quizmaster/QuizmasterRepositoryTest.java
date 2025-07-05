@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -99,7 +99,7 @@ public class QuizmasterRepositoryTest {
         .username(username)
         .twitchId(twitchId)
         .email("test@example.com")
-        .createdAt(LocalDateTime.now())
+        .createdAt(ZonedDateTime.now())
         .build();
   }
 }

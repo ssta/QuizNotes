@@ -8,7 +8,7 @@ package com.ssta.quiz.quizmaster;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -67,8 +67,8 @@ public class QuizmasterTest {
     String username = "testuser";
     String twitchId = "twitch12345";
     String email = "test@example.com";
-    LocalDateTime createdAt = LocalDateTime.now();
-    LocalDateTime lastLogin = LocalDateTime.now().plusHours(1);
+    ZonedDateTime createdAt = ZonedDateTime.now();
+    ZonedDateTime lastLogin = ZonedDateTime.now().plusHours(1);
 
     // When
     Quizmaster quizmaster = new Quizmaster(id, username, twitchId, email, createdAt, lastLogin);
@@ -86,11 +86,11 @@ public class QuizmasterTest {
   public void testQuizmasterEqualsAndHashCode() {
     // Given
     Quizmaster quizmaster1 = new Quizmaster(1L, "user1", "twitch1", "email1@example.com",
-        LocalDateTime.now(), LocalDateTime.now());
+        ZonedDateTime.now(), ZonedDateTime.now());
     Quizmaster quizmaster2 = new Quizmaster(1L, "user1", "twitch1", "email1@example.com",
         quizmaster1.getCreatedAt(), quizmaster1.getLastLogin());
     Quizmaster quizmaster3 = new Quizmaster(2L, "user2", "twitch2", "email2@example.com",
-        LocalDateTime.now(), LocalDateTime.now());
+        ZonedDateTime.now(), ZonedDateTime.now());
 
     // Then
     assertEquals(quizmaster1, quizmaster2);
@@ -110,7 +110,7 @@ public class QuizmasterTest {
 
     // Then
     assertNotNull(quizmaster.getCreatedAt());
-    assertTrue(quizmaster.getCreatedAt().isBefore(LocalDateTime.now().plusSeconds(1)));
-    assertTrue(quizmaster.getCreatedAt().isAfter(LocalDateTime.now().minusSeconds(1)));
+    assertTrue(quizmaster.getCreatedAt().isBefore(ZonedDateTime.now().plusSeconds(1)));
+    assertTrue(quizmaster.getCreatedAt().isAfter(ZonedDateTime.now().minusSeconds(1)));
   }
 }
