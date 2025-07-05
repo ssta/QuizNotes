@@ -18,6 +18,7 @@ public interface UserService {
 
   Optional<User> findUserByTwitchId(String twitchId);
 
+  // TODO - do we need to know or care about the user's email address?
   Optional<User> findUserByEmail(String email);
 
   User updateUser(User user);

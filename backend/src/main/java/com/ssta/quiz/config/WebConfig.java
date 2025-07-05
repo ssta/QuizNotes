@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-
+  // TODO - do we really want to hardwire the allowed CORS stuff?  Maybe move it into configuration...
   @Override
   public void addCorsMappings(CorsRegistry registry) {
     registry.addMapping("/api/**")

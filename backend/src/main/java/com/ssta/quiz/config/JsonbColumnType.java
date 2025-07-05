@@ -24,7 +24,7 @@ import java.sql.Types;
  * Custom JSONB column type for PostgreSQL.
  */
 public class JsonbColumnType implements JdbcType {
-
+  // TODO - do we REALLY still need this?  It was part of a (failed) attempt to use H2 for unit testing - it can probably die now?
   @Override
   public int getJdbcTypeCode() {
     return Types.OTHER;

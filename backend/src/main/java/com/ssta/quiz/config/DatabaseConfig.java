@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class DatabaseConfig {
-
+// TODO - consolidate DatabaseConfig and HibernateConfig - we don't need two configs floating around!!
   /**
    * Custom PostgreSQL dialect that provides custom type mappings.
    */

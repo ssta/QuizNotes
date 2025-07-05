@@ -34,7 +34,7 @@ public class User {
 
   @Column(name = "twitch_id", unique = true)
   private String twitchId;
-
+  // TODO - do we really care what a User's email address is?
   @Column(name = "email", unique = true)
   private String email;
 

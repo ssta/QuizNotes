@@ -1,8 +1,19 @@
+rootProject.name = 'quiz'
+
 /*
  * Copyright (c) 2025. Stephen Stafford <clothcat@gmail.com>
  *
  * This code is licensed under the MIT license.  Please see LICENSE.md for details.
  */
 
-rootProject.name = 'quiz'
+/*
+ * Current modules
+ */
 include 'backend'
+
+/*
+ * Modules we know we’ll need soon.
+ * They can stay empty; Gradle is fine with that.
+ */
+include 'frontend'
+include 'common'

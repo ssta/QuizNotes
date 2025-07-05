@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class HibernateConfig {
-
+  // TODO - consolidate DatabaseConfig and HibernateConfig - we don't need two configs floating around!!
   @Bean
   public HibernatePropertiesCustomizer hibernatePropertiesCustomizer() {
     return hibernateProperties -> {
