@@ -16,6 +16,12 @@
  * This code is licensed under the MIT license.  Please see LICENSE.md for details.
  */
 
+/*
+ * Copyright (c) 2025. Stephen Stafford <clothcat@gmail.com>
+ *
+ * This code is licensed under the MIT license.  Please see LICENSE.md for details.
+ */
+
 -- Initial schema setup
 
 -- Users table for quiz masters
@@ -53,17 +59,6 @@ CREATE TABLE questions
     options JSONB,
     created_at    TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at    TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-
--- Answer options table
-CREATE TABLE answer_options
-(
-    id          BIGINT PRIMARY KEY,
-    question_id BIGINT NOT NULL REFERENCES questions (id),
-    option_text TEXT    NOT NULL,
-    is_correct  BOOLEAN NOT NULL         DEFAULT FALSE,
-    order_index INTEGER NOT NULL,
-    created_at  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Players table
