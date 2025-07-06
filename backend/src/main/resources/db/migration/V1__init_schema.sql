@@ -50,7 +50,6 @@ CREATE TABLE players
     nickname   VARCHAR(50)  NOT NULL,
     quiz_id BIGINT NOT NULL REFERENCES quizzes (id),
     session_id VARCHAR(100) NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (quiz_id, nickname)
 );
 

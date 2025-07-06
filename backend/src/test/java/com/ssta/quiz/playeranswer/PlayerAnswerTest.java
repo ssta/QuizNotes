@@ -21,7 +21,7 @@ class PlayerAnswerTest {
     // Setup
     Player player = new Player();
     player.setId(1L);
-    player.setDisplayName("TestPlayer");
+      player.setNickname("TestPlayer");
 
     Question question = new Question();
     question.setId(2L);

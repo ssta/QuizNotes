@@ -10,8 +10,6 @@ import com.ssta.quiz.testconfig.AbstractRepositoryTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,11 +34,7 @@ public class PlayerRepositoryTest extends AbstractRepositoryTest {
     // Then
     assertTrue(foundPlayer.isPresent());
     assertEquals(savedPlayer.getId(), foundPlayer.get().getId());
-    assertEquals("testplayer", foundPlayer.get().getUsername());
-    assertEquals("twitch12345", foundPlayer.get().getTwitchId());
-    assertEquals("Test Player", foundPlayer.get().getDisplayName());
-    assertEquals("player@example.com", foundPlayer.get().getEmail());
-    assertNotNull(foundPlayer.get().getCreatedAt());
+    assertEquals("testplayer", foundPlayer.get().getNickname());
   }
 
   @Test
@@ -50,85 +44,27 @@ public class PlayerRepositoryTest extends AbstractRepositoryTest {
     playerRepository.save(player);
 
     // When
-    Optional<Player> foundPlayer = playerRepository.findByUsername("findbyusername");
+    Optional<Player> foundPlayer = playerRepository.findByNickname("findbyusername");
 
     // Then
     assertTrue(foundPlayer.isPresent());
-    assertEquals("findbyusername", foundPlayer.get().getUsername());
+    assertEquals("findbyusername", foundPlayer.get().getNickname());
   }
 
   @Test
-  public void testFindByTwitchId() {
-    // Given
-    Player player = createTestPlayer("twitchuser", "findbytwitch");
-    playerRepository.save(player);
-
-    // When
-    Optional<Player> foundPlayer = playerRepository.findByTwitchId("findbytwitch");
-
-    // Then
-    assertTrue(foundPlayer.isPresent());
-    assertEquals("findbytwitch", foundPlayer.get().getTwitchId());
-  }
-
-  @Test
-  public void testExistsByUsername() {
+  public void testExistsByNickname() {
     // Given
     Player player = createTestPlayer("existsuser", "twitch99999");
     playerRepository.save(player);
 
     // When & Then
-    assertTrue(playerRepository.existsByUsername("existsuser"));
-    assertFalse(playerRepository.existsByUsername("nonexistentuser"));
-  }
-
-  @Test
-  public void testExistsByTwitchId() {
-    // Given
-    Player player = createTestPlayer("twitchexistsuser", "twitchexists");
-    playerRepository.save(player);
-
-    // When & Then
-    assertTrue(playerRepository.existsByTwitchId("twitchexists"));
-    assertFalse(playerRepository.existsByTwitchId("nonexistenttwitch"));
-  }
-
-  @Test
-  public void testFindAllOrderByTotalPointsDesc() {
-    // Given
-    Player player1 = createTestPlayer("highscore", "twitch1");
-    player1.setTotalPoints(1000L);
-
-    Player player2 = createTestPlayer("midscore", "twitch2");
-    player2.setTotalPoints(500L);
-
-    Player player3 = createTestPlayer("lowscore", "twitch3");
-    player3.setTotalPoints(100L);
-
-    playerRepository.saveAll(List.of(player3, player1, player2));
-
-    // When
-    List<Player> players = playerRepository.findAll();
-    players.sort((a, b) -> b.getTotalPoints().compareTo(a.getTotalPoints()));
-
-    // Then
-    assertEquals(3, players.size());
-    assertEquals("highscore", players.get(0).getUsername());
-    assertEquals("midscore", players.get(1).getUsername());
-    assertEquals("lowscore", players.get(2).getUsername());
+    assertTrue(playerRepository.existsByNickname("existsuser"));
+    assertFalse(playerRepository.existsByNickname("nonexistentuser"));
   }
 
   private Player createTestPlayer(String username, String twitchId) {
     return Player.builder()
-        .username(username)
-        .twitchId(twitchId)
-        .displayName("Test Player")
-        .email("player@example.com")
-        .avatar("https://example.com/avatar.png")
-        .totalPoints(0L)
-        .gamesPlayed(0)
-        .gamesWon(0)
-        .createdAt(ZonedDateTime.now())
+        .nickname(username)
         .build();
   }
 }

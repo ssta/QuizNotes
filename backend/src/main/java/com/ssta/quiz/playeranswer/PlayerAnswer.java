@@ -43,7 +43,7 @@ public class PlayerAnswer {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  private long id;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "player_id", nullable = false)
@@ -54,14 +54,16 @@ public class PlayerAnswer {
   private Question question;
 
   @Column(name = "answer_option", nullable = false)
-  private Integer answerOption;
+  private int answerOption;
 
   @Column(name = "correct", nullable = false)
   private boolean correct = false;
 
+  /* Null means the time ran out without receiving a response */
   @Column(name = "response_time_ms")
   private Integer responseTimeMs;
 
+  /* Null mean that the question has not yet been scored.  Zero means that the score is zero */
   private Integer score;
 
   @CreationTimestamp
