@@ -4,24 +4,6 @@
  * This code is licensed under the MIT license.  Please see LICENSE.md for details.
  */
 
-/*
- * Copyright (c) 2025. Stephen Stafford <clothcat@gmail.com>
- *
- * This code is licensed under the MIT license.  Please see LICENSE.md for details.
- */
-
-/*
- * Copyright (c) 2025. Stephen Stafford <clothcat@gmail.com>
- *
- * This code is licensed under the MIT license.  Please see LICENSE.md for details.
- */
-
-/*
- * Copyright (c) 2025. Stephen Stafford <clothcat@gmail.com>
- *
- * This code is licensed under the MIT license.  Please see LICENSE.md for details.
- */
-
 -- Initial schema setup
 
 -- Users table for quiz masters
@@ -78,7 +60,8 @@ CREATE TABLE player_answers
     id               BIGINT PRIMARY KEY,
     player_id        BIGINT NOT NULL REFERENCES players (id),
     question_id      BIGINT NOT NULL REFERENCES questions (id),
-    answer_option_id BIGINT REFERENCES answer_options (id),
+    answer_option INT     NOT NULL,
+    correct       BOOLEAN NOT NULL DEFAULT FALSE,
     response_time_ms INTEGER,
     score            INTEGER,
     created_at       TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
@@ -88,7 +71,6 @@ CREATE TABLE player_answers
 -- Indices for better performance
 CREATE INDEX idx_quizzes_user_id ON quizzes (user_id);
 CREATE INDEX idx_questions_quiz_id ON questions (quiz_id);
-CREATE INDEX idx_answer_options_question_id ON answer_options (question_id);
 CREATE INDEX idx_players_quiz_id ON players (quiz_id);
 CREATE INDEX idx_player_answers_player_id ON player_answers (player_id);
 CREATE INDEX idx_player_answers_question_id ON player_answers (question_id);
