@@ -1,0 +1,70 @@
+/*
+ * Copyright (c) 2025. Stephen Stafford <clothcat@gmail.com>
+ *
+ * This code is licensed under the MIT license.  Please see LICENSE.md for details.
+ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.app-title {
+  font-size: 2.5rem;
+  margin-bottom: 5rem;
+  color: #333;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.login-button {
+  background-color: #6441a5; /* Twitch color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 15px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 300px;
+  transition: background-color 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-button:hover {
+  background-color: #7d5bbe;
+}
+
+.login-button:focus {
+  outline: 2px solid #9147ff;
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .app-title {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .login-button {
+    width: 100%;
+    max-width: 300px;
+  }
+}

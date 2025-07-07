@@ -84,3 +84,48 @@ src/
 
 See the [Frontend Architecture](../notes/Frontend.md) document for detailed information about the frontend design and
 implementation.
+
+## Running in WSL
+
+If you're using Windows Subsystem for Linux (WSL) while keeping the project files on your Windows drive, follow these
+steps:
+
+### Performance Considerations
+
+1. **File System Performance**: Accessing Windows files from WSL can be slower than native Linux files. Consider these
+   options:
+    - For best performance, clone the repository to your WSL filesystem
+    - If keeping files on Windows, use the WSL mount path (e.g., `/mnt/c/path/to/project`)
+
+### Setup and Configuration
+
+1. **Install Node.js in WSL**: Make sure you have Node.js installed in your WSL environment
+   ```bash
+   curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+   sudo apt-get install -y nodejs
+   ```
+
+2. **NPM Configuration**: To improve performance when working with Windows-hosted files:
+   ```bash
+   # In your project directory
+   npm config set cache ~/.npm --global
+   npm config set resolute-symlinks false
+   ```
+
+3. **Running the Development Server**:
+   ```bash
+   cd /mnt/path/to/your/frontend
+   npm install
+   npm run dev
+   ```
+
+4. **Accessing the App**: The development server will be available at http://localhost:5173
+    - You can access this directly from your Windows browser
+
+### Troubleshooting
+
+- If you encounter EACCES permission errors, ensure proper file permissions in WSL
+- For file watching issues, you may need to add `CHOKIDAR_USEPOLLING=true` before your npm commands:
+  ```bash
+  CHOKIDAR_USEPOLLING=true npm run dev
+  ```
