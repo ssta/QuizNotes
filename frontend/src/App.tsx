@@ -7,10 +7,14 @@
 import React from 'react';
 
 const App: React.FC = () => {
+    function handleClick() {
+        alert("Hello World");
+    }
+
     return (
         <div className="login-container">
             <h1 className="app-title">QUIZ MASTER</h1>
-            <button className="login-button">Login with Twitch</button>
+            <button className="login-button" onClick={handleClick}>Login with Twitch</button>
         </div>
     );
 };
